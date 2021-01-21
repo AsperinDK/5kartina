@@ -1,0 +1,10 @@
+# Авторизация
+AuthType Basic
+AuthName "Что вам нужно? Мы Вас не звали"
+AuthUserFile /var/www/u0521603/data/www/5kartina.ru/admin/.htpasswd
+Require valid-user
+
+# Настройка отображения файлов
+Options +Indexes
+IndexOptions FancyIndexing XHTML NameWidth=* FoldersFirst SuppressDescription IgnoreCase SuppressHTMLPreamble HTMLTable Charset=UTF-8
+IndexOrderDefault Descending Date

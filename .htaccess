@@ -1,0 +1,32 @@
+AddDefaultCharset utf-8
+ErrorDocument 404 /404/
+DirectoryIndex index.php
+Options -Indexes
+
+# Включение ошибок
+php_value display_errors 1
+php_value display_startup_errors 1
+php_value error_reporting E_ALL
+
+# Загрузка больших файлов
+php_value upload_max_filesize 128M
+php_value post_max_size 128M
+php_value max_execution_time 300
+php_value max_input_time 300
+
+# Время жизни сессии/кук
+php_value session.cookie_lifetime 32140800
+php_value session.gc_maxlifetime 32140800
+
+RewriteEngine on
+
+# Редирект с www версии на основной домен
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [L,R=301]
+
+# Редирект на HTTPS версию
+RewriteCond %{ENV:HTTPS} !on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Запрет исполнения php файлов (чтобы только index.php)
+RewriteRule .php$ - [L,R=404]
